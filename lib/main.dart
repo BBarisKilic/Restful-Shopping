@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:http_demo/screens/main_screen.dart';
+import 'package:restful/screens/main_screen.dart';
 
 void main() {
-  runApp(HttpDemoApp());
+  runApp(Restful());
 }
 
-class HttpDemoApp extends StatelessWidget {
+class Restful extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

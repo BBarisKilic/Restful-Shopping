@@ -1,2 +1,3 @@
-# http_demo
-A Flutter App with REST Api
+# Restful
+
+An app that fetches data from API.
