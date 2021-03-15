@@ -24,6 +24,7 @@ class _MainScreenState extends State {
   void initState() {
     super.initState();
     getCategoriesFromApi();
+    getProducts();
   }
 
   @override
@@ -90,7 +91,17 @@ class _MainScreenState extends State {
   }
 
   void getProductsByCategoryId(Category category) {
-    ProductApi.getProcutsByCategoryId(category.id).then((response) {
+    ProductApi.getProductsByCategoryId(category.id).then((response) {
+      setState(() {
+        Iterable list = json.decode((response.body));
+        this.products =
+            list.map((product) => Product.fromJSON(product)).toList();
+      });
+    });
+  }
+
+  void getProducts() {
+    ProductApi.getProducts().then((response) {
       setState(() {
         Iterable list = json.decode((response.body));
         this.products =

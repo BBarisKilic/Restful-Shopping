@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restful_shopping/widgets/product_list_row.dart';
 
 import '../models/product.dart';
 
@@ -28,7 +29,7 @@ class _ProductListWidgetState extends State<ProductListWidget> {
             children: List.generate(
               widget.products.length,
               (index) {
-                return ProductListRowWidget(widget.products[index]);
+                return ProductListRow(widget.products[index]);
               },
             ),
           ),
