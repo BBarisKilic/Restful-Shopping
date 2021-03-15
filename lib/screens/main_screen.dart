@@ -3,6 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:restful_shopping/models/category.dart';
 import 'package:restful_shopping/data.api/category_api.dart';
+import 'package:restful_shopping/widgets/product_list_widget.dart';
+
+import '../data.api/product_api.dart';
+import '../models/product.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -12,8 +16,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State {
-  List<Category> categories = List<Category>.empty();
-  List<Widget> categoryWidgets = List<Widget>.empty();
+  List<Category> categories = List<Category>();
+  List<Widget> categoryWidgets = List<Widget>();
+  List<Product> products = List<Product>();
 
   @override
   void initState() {
@@ -41,7 +46,8 @@ class _MainScreenState extends State {
               child: Row(
                 children: categoryWidgets,
               ),
-            )
+            ),
+            ProductListWidget(products),
           ],
         ),
       ),
@@ -52,7 +58,8 @@ class _MainScreenState extends State {
     CategoryApi.getCategories().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
-        this.categories = list.map((category) => Category.fromJSON(category));
+        this.categories =
+            list.map((category) => Category.fromJSON(category)).toList();
         getCategoryWidgets();
       });
     });
@@ -65,15 +72,30 @@ class _MainScreenState extends State {
   }
 
   Widget getCategoryWidget(Category category) {
-    return TextButton(
-      onPressed: () {},
-      child: Text(
-        category.categoryName,
-        style: TextStyle(color: Colors.blueGrey),
-      ),
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: TextButton(
+        onPressed: () {
+          getProductsByCategoryId(category);
+        },
+        child: Text(
+          category.categoryName,
+          style: TextStyle(color: Colors.blueGrey),
+        ),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent),
+        ),
       ),
     );
+  }
+
+  void getProductsByCategoryId(Category category) {
+    ProductApi.getProcutsByCategoryId(category.id).then((response) {
+      setState(() {
+        Iterable list = json.decode((response.body));
+        this.products =
+            list.map((product) => Product.fromJSON(product)).toList();
+      });
+    });
   }
 }
