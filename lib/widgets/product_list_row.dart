@@ -11,22 +11,26 @@ class ProductListRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Card(
+        color: Color(0xffc09074),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              child: Image.network(
-                  "https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
-              height: 130,
+            Image.network(
+              "https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
               width: MediaQuery.of(context).size.width * 0.5,
+              fit: BoxFit.fill,
             ),
-            Text(product.productName),
-            SizedBox(
-              height: 6,
+            Text(
+              product.productName,
+              style: TextStyle(fontSize: 14, color: Colors.white),
             ),
             Text(
               product.unitPrice.toString() + " TL",
-              style: TextStyle(fontSize: 16, color: Colors.grey),
+              style: TextStyle(fontSize: 16, color: Colors.white),
             ),
+            SizedBox(
+              height: 1,
+            )
           ],
         ),
       ),

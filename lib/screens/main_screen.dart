@@ -33,13 +33,16 @@ class _MainScreenState extends State {
       appBar: AppBar(
         title: Text(
           "Restful Shopping",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Color(0xff56733C),
         centerTitle: true,
       ),
-      body: Padding(
+      body: Container(
         padding: EdgeInsets.all(10.0),
+        color: Color(0xffC6DB9F),
         child: Column(
           children: [
             SingleChildScrollView(
@@ -81,7 +84,9 @@ class _MainScreenState extends State {
         },
         child: Text(
           category.categoryName,
-          style: TextStyle(color: Colors.blueGrey),
+          style: TextStyle(
+            color: Color(0xff784742),
+          ),
         ),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent),
